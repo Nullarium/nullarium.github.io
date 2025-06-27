@@ -1,2 +1,2 @@
 # nullarium.github.io
-L'emporio universale di tutto l'inutile di cui hai bisogno
+L'emporio galattico universale, di tutto l'inutile di cui hai bisogno.
