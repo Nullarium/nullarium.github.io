@@ -2,269 +2,473 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8" />
-<title>Catalogo del Nulla – Nullarium™</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
+<title>Catalogo del Nulla – Nullarium™ 3.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&family=Orbitron:wght@700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet" />
 <style>
-  /* Background galattico animato */
-  @keyframes nebulaMove {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-  }
-
+  /* Background animato con stelle e comete */
   body {
     margin: 0;
     padding: 0;
     font-family: 'Open Sans', sans-serif;
-    background:
-      radial-gradient(circle at 25% 25%, #9f7aea88, transparent 40%),
-      radial-gradient(circle at 75% 70%, #60a5fa88, transparent 50%),
-      url('https://cdn.pixabay.com/photo/2017/08/30/12/45/nebula-2695746_1280.jpg') no-repeat center center fixed;
-    background-size: 200% 200%;
-    animation: nebulaMove 40s ease infinite;
-    color: #eee;
+    background: radial-gradient(circle at center, #0c0032 0%, #1e004a 70%, #000000 100%);
+    overflow-x: hidden;
+    color: #ddd;
     min-height: 100vh;
-    text-align: center;
     display: flex;
     flex-direction: column;
+    align-items: center;
+  }
+
+  /* Canvas per stelle */
+  #stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
   }
 
   h1 {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 3.8em;
+    font-family: 'Uncial Antiqua', serif;
+    font-size: 4rem;
     margin: 60px 0 10px 0;
-    background: linear-gradient(45deg, #a78bfa, #60a5fa, #34d399);
-    background-clip: text;
+    background: linear-gradient(45deg, #a25fff, #3b82f6, #60a5fa);
     -webkit-background-clip: text;
-    color: transparent;
-    text-shadow: 0 0 15px #8a73f7cc;
-    animation: hueRotate 10s linear infinite;
+    -webkit-text-fill-color: transparent;
+    animation: glowText 4s ease-in-out infinite alternate;
+    z-index: 1;
   }
 
-  @keyframes hueRotate {
-    0% {filter: hue-rotate(0deg);}
-    100% {filter: hue-rotate(360deg);}
+  @keyframes glowText {
+    0% { text-shadow: 0 0 8px #a25fff, 0 0 12px #3b82f6; }
+    100% { text-shadow: 0 0 15px #60a5fa, 0 0 25px #a25fff; }
   }
 
   p.sottotitolo {
-    font-size: 1.3em;
-    font-weight: 600;
-    margin: 0 0 50px 0;
+    font-size: 1.4rem;
     max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    color: #d1d5dbcc;
-    text-shadow: 0 0 6px #00000088;
+    margin: 0 0 50px 0;
+    font-weight: 600;
+    text-align: center;
+    color: #aaa;
+    text-shadow: 0 0 8px #222;
+    z-index: 1;
   }
 
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
     gap: 30px;
     max-width: 1100px;
-    margin: 0 auto 80px;
-    padding: 0 20px;
+    padding: 0 20px 80px;
+    width: 100%;
+    z-index: 1;
   }
 
   .card {
-    background: linear-gradient(135deg, #1e293bcc, #3b425299);
-    border-radius: 16px;
-    box-shadow:
-      0 0 10px #7f5af0cc,
-      0 10px 20px #2e2e4ecc;
-    padding: 30px 20px;
-    cursor: pointer;
-    color: #dbeafe;
-    user-select: none;
     position: relative;
+    background: linear-gradient(145deg, #1a1644, #2b256b);
+    border-radius: 18px;
+    padding: 30px 20px;
+    box-shadow:
+      0 0 15px #5b3db9aa,
+      0 10px 30px #321f6b99;
+    cursor: pointer;
+    color: #c5c8ff;
+    overflow: hidden;
     transition:
-      transform 0.3s ease,
-      box-shadow 0.3s ease,
-      background 0.4s ease;
+      transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+      box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, #7c3aedcc 15%, transparent 70%);
+    filter: blur(15px);
+    opacity: 0.3;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .card:hover::before {
+    opacity: 0.8;
   }
 
   .card:hover {
-    transform: translateY(-12px) scale(1.05);
+    transform: translateY(-15px) scale(1.07);
     box-shadow:
-      0 0 30px #8b5cf6cc,
-      0 15px 30px #5e60cecc;
-    background: linear-gradient(135deg, #7c3aedcc, #60a5facc);
+      0 0 25px #a678ffcc,
+      0 15px 40px #5e3dbaff;
+    z-index: 10;
   }
 
   .emoji {
-    font-size: 3.2em;
-    margin-bottom: 15px;
-    filter: drop-shadow(0 0 4px #9ca3afcc);
+    font-size: 3.8rem;
+    margin-bottom: 18px;
+    filter: drop-shadow(0 0 6px #8b5cf6cc);
     transition: filter 0.3s ease;
+    z-index: 1;
+    position: relative;
   }
 
   .card:hover .emoji {
-    filter: drop-shadow(0 0 8px #d8b4fecc);
+    filter: drop-shadow(0 0 14px #d8b4fecc);
   }
 
   .nome-categoria {
     font-family: 'Orbitron', sans-serif;
-    font-size: 1.25em;
+    font-size: 1.3rem;
     font-weight: 700;
-    margin-bottom: 10px;
-    text-shadow: 0 0 8px #a78bfaaa;
+    margin-bottom: 12px;
+    color: #a78bfa;
+    text-shadow:
+      0 0 8px #7c3aedcc,
+      0 0 20px #60a5faee;
+    transition: text-shadow 0.4s ease;
+    position: relative;
+    z-index: 1;
   }
 
   .descrizione {
-    font-size: 1em;
-    color: #cbd5e1cc;
+    font-size: 1.05rem;
+    color: #c0c3ffcc;
     line-height: 1.3;
-    min-height: 3em;
-    text-shadow: 0 0 4px #000000cc;
+    min-height: 4em;
+    text-shadow: 0 0 6px #000000bb;
+    z-index: 1;
+    position: relative;
   }
 
   footer {
-    color: #aaa;
-    font-size: 0.9em;
-    padding: 25px 10px;
-    background: #111827ee;
+    color: #777aaa;
+    font-size: 0.9rem;
+    padding: 30px 15px;
+    background: #0b0523dd;
     text-align: center;
     font-style: italic;
-    border-top: 1px solid #333;
-    margin-top: auto;
+    border-top: 1px solid #2e1d68;
+    width: 100%;
+    position: relative;
+    z-index: 1;
   }
 
-  /* Pulsante “Torna a casa” galattico */
   .home-button {
     position: fixed;
     top: 20px;
     right: 20px;
     background: linear-gradient(135deg, #7c3aedcc, #60a5facc);
     color: white;
-    padding: 12px 24px;
+    padding: 12px 28px;
     font-family: 'Orbitron', sans-serif;
     font-weight: 700;
     border-radius: 30px;
-    box-shadow: 0 4px 15px #7c3aedaa;
+    box-shadow: 0 5px 20px #7c3aedbb;
     text-decoration: none;
     transition: background 0.3s ease;
-    z-index: 100;
+    z-index: 20;
   }
 
   .home-button:hover {
     background: linear-gradient(135deg, #a78bfaee, #3b82f6ee);
   }
 
-  /* Animazione bagliore */
-  @keyframes glowPulse {
-    0%, 100% {box-shadow: 0 0 10px #a78bfaaa;}
-    50% {box-shadow: 0 0 25px #60a5faee;}
+  /* Portale magico animato sulla card */
+  .card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    box-shadow:
+      0 0 15px #9b7efccc,
+      0 0 30px #8b5cf6cc,
+      0 0 60px #7c3aedaa;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(6px);
   }
 
-  .nome-categoria {
-    animation: glowPulse 3s ease-in-out infinite;
+  .card:hover::after {
+    opacity: 1;
   }
+
+  /* Stelle scintillanti su card */
+  .star {
+    position: absolute;
+    background: radial-gradient(circle, #fff, #9b7efc88);
+    border-radius: 50%;
+    opacity: 0.8;
+    filter: drop-shadow(0 0 4px #bbaaff);
+    animation: twinkle 3s infinite ease-in-out alternate;
+  }
+  @keyframes twinkle {
+    0% {opacity: 0.2;}
+    100% {opacity: 1;}
+  }
+
+  /* Posizioni casuali per le stelle */
+  .star1 {top: 20%; left: 15%; width: 6px; height: 6px; animation-delay: 0s;}
+  .star2 {top: 75%; left: 40%; width: 4px; height: 4px; animation-delay: 1.2s;}
+  .star3 {top: 40%; left: 70%; width: 5px; height: 5px; animation-delay: 0.6s;}
+  .star4 {top: 85%; left: 85%; width: 3px; height: 3px; animation-delay: 1.8s;}
+
 </style>
 </head>
 <body>
 
-  <a href="index.html" class="home-button" title="Torna alla homepage">🏠 Home</a>
+<a href="index.html" class="home-button" title="Torna alla homepage">🏠 Home</a>
 
-  <h1>Il Catalogo del Nulla™</h1>
-  <p class="sottotitolo">Tutto quello che non ti serve, diviso per genere, disordine e inazione.</p>
+<h1>Il Catalogo del Nulla™</h1>
+<p class="sottotitolo">Tutto quello che non ti serve, diviso per genere, disordine e inazione.</p>
 
-  <div class="grid">
+<div class="grid">
 
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Certificati di Nulla">
-      <div class="emoji" aria-hidden="true">🎓</div>
-      <div class="nome-categoria">Certificati di Nulla</div>
-      <div class="descrizione">Attestati ufficiali di assenza, vuoto e traguardi inutili.</div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Pensieri Non Pensati">
-      <div class="emoji" aria-hidden="true">🧠</div>
-      <div class="nome-categoria">Pensieri Non Pensati</div>
-      <div class="descrizione">Raccolte di intuizioni evitate e frasi lasciate a metà.</div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Manuali per Non Fare">
-      <div class="emoji" aria-hidden="true">📘</div>
-      <div class="nome-categoria">Manuali per Non Fare</div>
-      <div class="descrizione">Guide dettagliate per non riuscire in niente con stile.</div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Poster Assurdi">
-      <div class="emoji" aria-hidden="true">📜</div>
-      <div class="nome-categoria">Poster Assurdi</div>
-      <div class="descrizione">Appendili dove nessuno li capirà. Nemmeno tu.</div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Oracoli del Nulla">
-      <div class="emoji" aria-hidden="true">🔮</div>
-      <div class="nome-categoria">Oracoli del Nulla</div>
-      <div class="descrizione">Risposte sbagliate a domande inesistenti.</div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Carte del Caos">
-      <div class="emoji" aria-hidden="true">🃏</div>
-      <div class="nome-categoria">Carte del Caos</div>
-      <div class="descrizione">Gioca con l’imprevedibile. Non aspettarti regole.</div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Collezioni di Silenzi">
-      <div class="emoji" aria-hidden="true">🔇</div>
-      <div class="nome-categoria">Collezioni di Silenzi</div>
-      <div class="descrizione">Audio non registrati di silenzio selezionato.</div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="NFT del Vuoto">
-      <div class="emoji" aria-hidden="true">💎</div>
-      <div class="nome-categoria">NFT del Vuoto</div>
-      <div class="descrizione">Possiedi una porzione unica di niente digitale.</div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Biglietti per Viaggi Inutili">
-      <div class="emoji" aria-hidden="true">🎟️</div>
-      <div class="nome-categoria">Biglietti per Viaggi Inutili</div>
-      <div class="descrizione">Prenota l’impossibile. Andata e ritorno per il Nulla.</div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Servizi Immaginari">
-      <div class="emoji" aria-hidden="true">🛠️</div>
-      <div class="nome-categoria">Servizi Immaginari</div>
-      <div class="descrizione">Offerte speciali per esperienze inesistenti.</div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Ritardi Programmati">
-      <div class="emoji" aria-hidden="true">🐌</div>
-      <div class="nome-categoria">Ritardi Programmati</div>
-      <div class="descrizione">Per chi vuole arrivare tardi con largo anticipo.</div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Pacchi Vuoti">
-      <div class="emoji" aria-hidden="true">📦</div>
-      <div class="nome-categoria">Pacchi Vuoti</div>
-      <div class="descrizione">Confezionati con cura, contengono l'assoluto niente.</div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Frammenti Inutili">
-      <div class="emoji" aria-hidden="true">🧩</div>
-      <div class="nome-categoria">Frammenti Inutili</div>
-      <div class="descrizione">Pezzi mancanti di oggetti mai esistiti.</div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Sogni Non Sognati">
-      <div class="emoji" aria-hidden="true">🛏️</div>
-      <div class="nome-categoria">Sogni Non Sognati</div>
-      <div class="descrizione">Oniriche assurdità mai apparse nel tuo cervello.</div>
-    </div>
-
-    <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Istruzioni per Fare Niente">
-      <div class="emoji" aria-hidden="true">🧼</div>
-      <div class="nome-categoria">Istruzioni per Fare Niente</div>
-      <div class="descrizione">Segui i passaggi... e poi ignora tutto.</div>
-    </div>
-
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Certificati di Nulla">
+    <div class="emoji" aria-hidden="true">🎓</div>
+    <div class="nome-categoria">Certificati di Nulla</div>
+    <div class="descrizione">Attestati ufficiali di assenza, vuoto e traguardi inutili.</div>
+    <div class="star star1"></div>
+    <div class="star star2"></div>
   </div>
 
-  <footer>
-    © Nullarium™ – Il catalogo più inutile, desiderabile e galattico dell'universo.
-  </footer>
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Pensieri Non Pensati">
+    <div class="emoji" aria-hidden="true">🧠</div>
+    <div class="nome-categoria">Pensieri Non Pensati</div>
+    <div class="descrizione">Raccolte di intuizioni evitate e frasi lasciate a metà.</div>
+    <div class="star star3"></div>
+    <div class="star star4"></div>
+  </div>
+
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Manuali per Non Fare">
+    <div class="emoji" aria-hidden="true">📘</div>
+    <div class="nome-categoria">Manuali per Non Fare</div>
+    <div class="descrizione">Guide dettagliate per non riuscire in niente con stile.</div>
+    <div class="star star2"></div>
+    <div class="star star3"></div>
+  </div>
+
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Poster Assurdi">
+    <div class="emoji" aria-hidden="true">📜</div>
+    <div class="nome-categoria">Poster Assurdi</div>
+    <div class="descrizione">Appendili dove nessuno li capirà. Nemmeno tu.</div>
+    <div class="star star1"></div>
+    <div class="star star4"></div>
+  </div>
+
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Oracoli del Nulla">
+    <div class="emoji" aria-hidden="true">🔮</div>
+    <div class="nome-categoria">Oracoli del Nulla</div>
+    <div class="descrizione">Risposte sbagliate a domande inesistenti.</div>
+    <div class="star star2"></div>
+    <div class="star star4"></div>
+  </div>
+
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Carte del Caos">
+    <div class="emoji" aria-hidden="true">🃏</div>
+    <div class="nome-categoria">Carte del Caos</div>
+    <div class="descrizione">Gioca con l’imprevedibile. Non aspettarti regole.</div>
+    <div class="star star1"></div>
+    <div class="star star3"></div>
+  </div>
+
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Collezioni di Silenzi">
+    <div class="emoji" aria-hidden="true">🔇</div>
+    <div class="nome-categoria">Collezioni di Silenzi</div>
+    <div class="descrizione">Audio non registrati di silenzio selezionato.</div>
+    <div class="star star2"></div>
+    <div class="star star3"></div>
+  </div>
+
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="NFT del Vuoto">
+    <div class="emoji" aria-hidden="true">💎</div>
+    <div class="nome-categoria">NFT del Vuoto</div>
+    <div class="descrizione">Possiedi una porzione unica di niente digitale.</div>
+    <div class="star star1"></div>
+    <div class="star star4"></div>
+  </div>
+
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Biglietti per Viaggi Inutili">
+    <div class="emoji" aria-hidden="true">🎟️</div>
+    <div class="nome-categoria">Biglietti per Viaggi Inutili</div>
+    <div class="descrizione">Prenota l’impossibile. Andata e ritorno per il Nulla.</div>
+    <div class="star star3"></div>
+    <div class="star star4"></div>
+  </div>
+
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Servizi Immaginari">
+    <div class="emoji" aria-hidden="true">🛠️</div>
+    <div class="nome-categoria">Servizi Immaginari</div>
+    <div class="descrizione">Offerte speciali per esperienze inesistenti.</div>
+    <div class="star star1"></div>
+    <div class="star star2"></div>
+  </div>
+
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Ritardi Programmati">
+    <div class="emoji" aria-hidden="true">🐌</div>
+    <div class="nome-categoria">Ritardi Programmati</div>
+    <div class="descrizione">Per chi vuole arrivare tardi con largo anticipo.</div>
+    <div class="star star2"></div>
+    <div class="star star3"></div>
+  </div>
+
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Pacchi Vuoti">
+    <div class="emoji" aria-hidden="true">📦</div>
+    <div class="nome-categoria">Pacchi Vuoti</div>
+    <div class="descrizione">Confezionati con cura, contengono l'assoluto niente.</div>
+    <div class="star star1"></div>
+    <div class="star star4"></div>
+  </div>
+
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Frammenti Inutili">
+    <div class="emoji" aria-hidden="true">🧩</div>
+    <div class="nome-categoria">Frammenti Inutili</div>
+    <div class="descrizione">Pezzi mancanti di oggetti mai esistiti.</div>
+    <div class="star star3"></div>
+    <div class="star star4"></div>
+  </div>
+
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Sogni Non Sognati">
+    <div class="emoji" aria-hidden="true">🛏️</div>
+    <div class="nome-categoria">Sogni Non Sognati</div>
+    <div class="descrizione">Oniriche assurdità mai apparse nel tuo cervello.</div>
+    <div class="star star1"></div>
+    <div class="star star2"></div>
+  </div>
+
+  <div class="card" tabindex="0" role="button" aria-pressed="false" aria-label="Istruzioni per Fare Niente">
+    <div class="emoji" aria-hidden="true">🧼</div>
+    <div class="nome-categoria">Istruzioni per Fare Niente</div>
+    <div class="descrizione">Segui i passaggi... e poi ignora tutto.</div>
+    <div class="star star3"></div>
+    <div class="star star4"></div>
+  </div>
+
+</div>
+
+<footer>
+  © Nullarium™ – Dove il nulla diventa leggenda galattica.
+</footer>
+
+<script>
+  // Canvas stellare con comete leggere
+  const canvas = document.createElement('canvas');
+  canvas.id = 'stars';
+  document.body.appendChild(canvas);
+
+  const ctx = canvas.getContext('2d');
+  let width, height;
+
+  let stars = [];
+  let shootingStars = [];
+
+  function random(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  function createStars() {
+    stars = [];
+    for(let i = 0; i < 200; i++) {
+      stars.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.1 + 0.3,
+        alpha: Math.random() * 0.8 + 0.2,
+        alphaChange: Math.random() * 0.005 + 0.002,
+      });
+    }
+  }
+
+  function createShootingStar() {
+    shootingStars.push({
+      x: Math.random() * width,
+      y: 0,
+      length: random(150, 300),
+      speed: random(10, 20),
+      size: random(1, 2),
+      waitTime: 0,
+      active: false
+    });
+  }
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width * window.devicePixelRatio;
+    canvas.height = height * window.devicePixelRatio;
+    canvas.style.width = width + 'px';
+    canvas.style.height = height + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = '#111';
+
+    stars.forEach(s => {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+      ctx.fill();
+
+      s.alpha += s.alphaChange;
+      if (s.alpha <= 0.2 || s.alpha >= 1) {
+        s.alphaChange = -s.alphaChange;
+      }
+    });
+
+    shootingStars.forEach((star, i) => {
+      if(star.active) {
+        star.x += star.speed;
+        star.y += star.speed;
+        star.length -= star.speed;
+        if(star.length <= 0) {
+          star.active = false;
+          star.waitTime = 0;
+        } else {
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.8)';
+          ctx.lineWidth = star.size;
+          ctx.beginPath();
+          ctx.moveTo(star.x, star.y);
+          ctx.lineTo(star.x - star.length, star.y - star.length);
+          ctx.stroke();
+        }
+      } else {
+        star.waitTime += 1;
+        if(star.waitTime > 100 + Math.random() * 200) {
+          star.active = true;
+          star.x = Math.random() * width * 0.8;
+          star.y = 0;
+          star.length = random(150, 300);
+          star.speed = random(10, 20);
+          star.size = random(1, 2);
+        }
+      }
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => {
+    resize();
+    createStars();
+  });
+
+  resize();
+  createStars();
+  createShootingStar();
+  createShootingStar();
+  draw();
+</script>
 
 </body>
 </html>
