@@ -3,58 +3,92 @@
 <head>
   <meta charset="UTF-8">
   <title>Nullarium – L’Emporio dell’Assurdo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Open+Sans:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(160deg, #e5e5e5, #f8f8f8);
+      background: linear-gradient(160deg, #e6e6e6, #f2f2f2);
       font-family: 'Open Sans', sans-serif;
       color: #222;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
       min-height: 100vh;
       text-align: center;
     }
 
     h1 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 3.5em;
-      color: #333;
-      margin-top: 40px;
+      font-size: 4em;
+      color: #2a2a2a;
+      margin-top: 60px;
     }
 
     p.slogan {
-      font-size: 1.3em;
-      font-style: italic;
-      color: #666;
-      margin: 10px auto 40px;
-      max-width: 600px;
+      font-size: 1.4em;
+      font-weight: 600;
+      color: #444;
+      margin: 15px auto 30px;
+      max-width: 700px;
     }
 
     a.catalogo {
       background-color: #00b8d9;
       color: #fff;
-      padding: 15px 25px;
+      padding: 15px 30px;
       border-radius: 8px;
-      font-size: 1.1em;
+      font-size: 1.2em;
       text-decoration: none;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      transition: background 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      margin-bottom: 50px;
     }
 
     a.catalogo:hover {
       background-color: #0086a5;
-      transform: scale(1.05);
+      transform: scale(1.07);
+    }
+
+    .sotto {
+      max-width: 800px;
+      padding: 30px;
+      background-color: #ffffffbb;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin-bottom: 60px;
+    }
+
+    .sotto h2 {
+      font-size: 1.8em;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .sotto ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 1.05em;
+    }
+
+    .sotto ul li {
+      margin: 10px 0;
+      color: #555;
+    }
+
+    .motti {
+      margin-top: 40px;
+      font-style: italic;
+      color: #777;
     }
 
     footer {
-      position: absolute;
-      bottom: 20px;
+      background: #ddd;
+      text-align: center;
+      color: #666;
+      padding: 25px 10px;
       font-size: 0.9em;
-      color: #aaa;
     }
   </style>
 </head>
@@ -62,10 +96,27 @@
 
   <h1>Nullarium</h1>
   <p class="slogan">L’emporio digitale del superfluo assoluto. Acquista oggi ciò che non ti servirà mai.</p>
+
   <a class="catalogo" href="catalogo.html">Accedi al nostro inutile catalogo</a>
 
+  <div class="sotto">
+    <h2>Cosa troverai nel nostro catalogo?</h2>
+    <ul>
+      <li>✓ Certificati di Nulla, per celebrare il niente</li>
+      <li>✓ Poster motivazionali che non motivano nessuno</li>
+      <li>✓ Carte, Oracoli e Manuali per non fare assolutamente nulla</li>
+      <li>✓ Biglietti per viaggi che non esistono</li>
+      <li>✓ Frammenti, sogni e ritardi accuratamente inutili</li>
+    </ul>
+    <div class="motti">
+      “Tutto quello che non ti serve, che non pensavi ti servisse in un solo posto.”<br>
+      “Il futuro è meravigliosamente vuoto.”<br>
+      “Tutto ciò che non ti servirà mai, ma di cui avrai sempre bisogno”
+    </div>
+  </div>
+
   <footer>
-    © Nullarium™ – Inutilità certificata dal 0000 a.C.
+    © Nullarium™ – Dal 0000 a.C. al Nulla Infinito. Nessuna logica è stata maltrattata durante la creazione.
   </footer>
 
 </body>
