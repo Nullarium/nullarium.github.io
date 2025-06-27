@@ -8,7 +8,9 @@
     body {
       margin: 0;
       padding: 0;
-      background: linear-gradient(160deg, #e6e6e6, #f2f2f2);
+      background: linear-gradient(135deg, #f1f6f9, #e4ecf3, #f7f0fa);
+      background-size: 600% 600%;
+      animation: sfondo 30s ease infinite;
       font-family: 'Open Sans', sans-serif;
       color: #222;
       display: flex;
@@ -18,10 +20,20 @@
       text-align: center;
     }
 
+    @keyframes sfondo {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
     h1 {
       font-family: 'Orbitron', sans-serif;
       font-size: 4em;
-      color: #2a2a2a;
+      background: linear-gradient(90deg, #a78bfa, #60a5fa, #34d399);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
       margin-top: 60px;
     }
 
@@ -34,26 +46,28 @@
     }
 
     a.catalogo {
-      background-color: #00b8d9;
+      background: linear-gradient(135deg, #60a5fa, #34d399);
       color: #fff;
       padding: 15px 30px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 1.2em;
       text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
       transition: all 0.3s ease;
       margin-bottom: 50px;
+      font-weight: bold;
     }
 
     a.catalogo:hover {
-      background-color: #0086a5;
-      transform: scale(1.07);
+      background: linear-gradient(135deg, #34d399, #60a5fa);
+      transform: scale(1.08);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.2);
     }
 
     .sotto {
       max-width: 800px;
       padding: 30px;
-      background-color: #ffffffbb;
+      background-color: #ffffffcc;
       border-radius: 12px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       margin-bottom: 60px;
@@ -84,7 +98,7 @@
     }
 
     footer {
-      background: #ddd;
+      background: #e0e0e0;
       text-align: center;
       color: #666;
       padding: 25px 10px;
@@ -109,9 +123,9 @@
       <li>✓ Frammenti, sogni e ritardi accuratamente inutili</li>
     </ul>
     <div class="motti">
-      “Tutto quello che non ti serve, che non pensavi ti servisse in un solo posto.”<br>
-      “Il futuro è meravigliosamente vuoto.”<br>
-      “Tutto ciò che non ti servirà mai, ma di cui avrai sempre bisogno”
+      “Tutto quello che non ti serve, in un solo posto.”<br>
+      “Il futuro è assurdamente vuoto.”<br>
+      “Ci prendiamo gioco del senso, con stile.”
     </div>
   </div>
 
